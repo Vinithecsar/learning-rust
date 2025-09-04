@@ -1,16 +1,16 @@
 use std::io;
 
-// mod converter_string;
-// mod ler_nome;
-// mod print_random;
 mod jogo_adivinhacao;
 
 fn main() -> io::Result<()> {
-    // print_random::print_random();
-    // converter_string::converter_string();
-    // ler_nome::ler_nome()?;
-
-    jogo_adivinhacao::jogo_adivinhacao()?;
-
-    Ok(())
+    match jogo_adivinhacao::jogo_adivinhacao() {
+        Ok(()) => Ok(()),
+        Err(e) => {
+            println!(
+                "Ocorreu um erro, execute o programa novamente. Detalhes: {}",
+                e
+            );
+            return Err(e);
+        }
+    }
 }

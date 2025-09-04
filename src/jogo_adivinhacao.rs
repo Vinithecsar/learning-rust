@@ -2,15 +2,15 @@ use std::io::{self, Write};
 
 use rand::Rng;
 
-pub fn jogo_adivinhacao() -> io::Result<()> {
-    // 1. Sortear um número n entre 1 e 100
-    // 2, Ler palpite do jogador
-    // 3. Três possibilidades
-    //  a. O jogador acertou: anunciar que o jogador ganhou e acabar o jogo
-    //  b. O palpite é menor que n: anunciar que o número certo é maior
-    //  c. O palpite é maior que n: anunciar que o número é menor
-    // 4. Ir para o passo 2
+// 1. Sortear um número n entre 1 e 100
+// 2, Ler palpite do jogador
+// 3. Três possibilidades
+//  a. O jogador acertou: anunciar que o jogador ganhou e acabar o jogo
+//  b. O palpite é menor que n: anunciar que o número certo é maior
+//  c. O palpite é maior que n: anunciar que o número é menor
+// 4. Ir para o passo 2
 
+pub fn jogo_adivinhacao() -> io::Result<()> {
     let sorteado: i32 = rand::rng().random_range(1..=100);
 
     println!("Número entre 1 e 100 sorteado!");
