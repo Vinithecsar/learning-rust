@@ -21,7 +21,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "jogo-adivinhacao"
+name = "learning-rust"
 version = "0.1.0"
 dependencies = [
  "rand",
