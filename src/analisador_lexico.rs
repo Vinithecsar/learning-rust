@@ -1,3 +1,45 @@
+/* Exemplo de implementação em main.rs
+fn main() {
+    let entradas = [
+        "450 + 20",
+        "450     +     20",
+        "450+20",
+        "0+-0",
+        "0 +++",
+        "10+a",
+        "10 + 20a",
+        "🦀🦀🦀30🦀🦀*    25  🐧/-+*30",
+        "4 5 0 + 2 3"
+    ];
+
+    for mut entrada_atual in entradas {
+        println!("Analisando a entrada {}", entrada_atual);
+        let mut result: Result<(usize, &str, &str), Option<usize>> = próximo(entrada_atual);
+
+        let mut caracateres_ja_contados: usize = 0;
+
+        while let Ok((pos, conteudo, restante)) = result {
+            print!("(\"{}\", {}) ", conteudo, caracateres_ja_contados + pos);
+
+            let caracteres_pulados = pos - 1;
+            let caracteres_no_conteudo = conteudo.chars().count();
+            let total_consumido_nesta_iteracao = caracteres_pulados + caracteres_no_conteudo;
+
+            caracateres_ja_contados += total_consumido_nesta_iteracao;
+
+            entrada_atual = restante;
+            result = próximo(entrada_atual);
+        }
+
+        if let Err(Some(pos)) = result {
+            print!("Erro na posição {}", caracateres_ja_contados + pos);
+        }
+
+        println!();
+    }
+}
+*/
+
 pub fn próximo(entrada: &str) -> Result<(usize, &str, &str), Option<usize>> {
     let operadores: [char; 5] = ['+', '-', '/', '*', '🐧'];
     let mut pos_char: usize = 0;

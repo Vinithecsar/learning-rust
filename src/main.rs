@@ -1,6 +1,6 @@
-use crate::analisador_lexico::próximo;
+use crate::analisador_lexico_encapsulado::Analisador;
 
-mod analisador_lexico;
+mod analisador_lexico_encapsulado;
 
 /*  Exemplos
     450 + 20
@@ -36,13 +36,14 @@ fn main() {
         "4 5 0 + 2 3"
     ];
 
-    for mut entrada_atual in entradas {
+    for entrada_atual in entradas {
         println!("Analisando a entrada {}", entrada_atual);
-        let mut result: Result<(usize, &str, &str), Option<usize>> = próximo(entrada_atual);
+        let mut analisador = Analisador::novo(entrada_atual);
+        let mut result: Result<(usize, &str), Option<usize>> = analisador.próximo();
 
         let mut caracateres_ja_contados: usize = 0;
 
-        while let Ok((pos, conteudo, restante)) = result {
+        while let Ok((pos, conteudo)) = result {
             print!("(\"{}\", {}) ", conteudo, caracateres_ja_contados + pos);
 
             let caracteres_pulados = pos - 1;
@@ -51,8 +52,7 @@ fn main() {
 
             caracateres_ja_contados += total_consumido_nesta_iteracao;
 
-            entrada_atual = restante;
-            result = próximo(entrada_atual);
+            result = analisador.próximo();
         }
 
         if let Err(Some(pos)) = result {
