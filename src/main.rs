@@ -66,6 +66,8 @@ fn main() {
         "-(3 + 4) * 2",
         "5 + (-3) * 2",
         "((10))",
+        "2 % 0",
+        "(2 + 7) % 9"
     ];
 
     for entrada_atual in entradas {

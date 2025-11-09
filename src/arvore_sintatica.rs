@@ -135,7 +135,7 @@ impl Expressão {
 fn precedencia(op: char) -> u8 {
     match op {
         '+' | '-' => 1,
-        '*' | '/' => 2,
+        '*' | '/' | '%' => 2,
         _ => 0,
     }
 }
@@ -152,7 +152,7 @@ pub fn tokenizar(s: &str) -> Option<Vec<String>> {
                     atual.clear();
                 }
             }
-            '(' | ')' | '+' | '-' | '*' | '/' => {
+            '(' | ')' | '+' | '-' | '*' | '/' | '%' => {
                 if !atual.is_empty() {
                     tokens.push(atual.clone());
                     atual.clear();
@@ -193,8 +193,8 @@ pub fn parse_expressao(tokens: &[String]) -> Option<(Expressão, &[String])> {
 pub fn parse_termo(tokens: &[String]) -> Option<(Expressão, &[String])> {
     let (mut esquerda, mut resto) = parse_fator(tokens)?;
     while let Some(op) = resto.first() {
-        if op == "*" || op == "/" {
-            let op_bin = if op == "*" { '*' } else { '/' };
+        if op == "*" || op == "/" || op == "%" {
+            let op_bin = if op == "*" { '*' } else if op == "/" { '/' } else { '%' };
             let (direita, resto2) = parse_fator(&resto[1..])?;
             esquerda = Expressão::OperacaoBinaria {
                 operacao: op_bin,
